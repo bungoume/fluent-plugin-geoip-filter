@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Yuri Umezaki"]
   spec.email         = ["bungoume@gmail.com"]
   spec.homepage      = "https://github.com/bungoume/fluent-plugin-geoip-filter"
-  spec.summary       = "Fluentd filter plugin to geolocate"
+  spec.summary       = "Fluentd filter plugin to add geoip"
   spec.description   = spec.summary
   spec.license       = "Apache-2.0"
 

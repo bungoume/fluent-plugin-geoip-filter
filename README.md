@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/bungoume/fluent-plugin-geoip-filter.svg?branch=master)](https://travis-ci.org/bungoume/fluent-plugin-geoip-filter)
 [![Dependency Status](https://gemnasium.com/bungoume/fluent-plugin-geoip-filter.svg)](https://gemnasium.com/bungoume/fluent-plugin-geoip-filter)
 
-[Fluentd](http://fluentd.org) filter plugin to geolocate.
+[Fluentd](http://fluentd.org) filter plugin to add geoip.
 
 
 ## Installation
