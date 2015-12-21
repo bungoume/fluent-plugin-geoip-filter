@@ -4,3 +4,6 @@ rvm:
   - 2.2
   - 2.0
   - 1.9.3
+
+before_install:
+  - sudo apt-get install geoip-database
