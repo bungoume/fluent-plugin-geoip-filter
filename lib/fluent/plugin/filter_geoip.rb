@@ -10,7 +10,7 @@ module Fluent
       super
     end
 
-    config_param :database_path, :string, :default => '/etc/td-agent/data/GeoIPCity.dat'
+    config_param :database_path, :string, :default => '/usr/share/GeoIP/GeoIP.dat'
     config_param :key_name, :string, :default => 'client_ip'
     config_param :out_key, :string, :default => 'geo'
     config_param :flatten, :bool, :default => false
