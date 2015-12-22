@@ -97,3 +97,6 @@ Copyright (c) 2015 Yuri Umezaki
 ## License
 
 [Apache License, Version 2.0.](http://www.apache.org/licenses/LICENSE-2.0)
+
+This product includes GeoLite data created by MaxMind, available from 
+[http://www.maxmind.com](http://www.maxmind.com).
