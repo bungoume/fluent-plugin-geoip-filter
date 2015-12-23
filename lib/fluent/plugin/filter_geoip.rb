@@ -16,12 +16,12 @@ module Fluent
     config_param :flatten, :bool, :default => false
 
     def configure(conf)
-      @geoip = GeoIP.new(@geoip_database)
       super
+      @parser = GeoIP.new(@database_path)
     end
 
     def filter(tag, time, record)
-      ip_addr = record[@geoip_lookup_key]
+      ip_addr = record[@key_name]
       unless ip_addr.nil?
         geo_ip = @geoip_cache.getset(ip_addr) { get_geoip(ip_addr) }
         if flatten
