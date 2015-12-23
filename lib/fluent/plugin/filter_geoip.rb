@@ -17,7 +17,13 @@ module Fluent
 
     def configure(conf)
       super
-      @parser = GeoIP.new(@database_path)
+      begin
+        @parser = GeoIP.new(@database_path)
+      rescue => e
+        @parser = GeoIP.new
+        log.warn "Failed to configure parser. Use default pattern.", :error_class => e.class, :error => e.message
+        log.warn_backtrace
+      end
     end
 
     def filter(tag, time, record)
