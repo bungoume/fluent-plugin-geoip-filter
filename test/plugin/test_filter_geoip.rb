@@ -38,4 +38,26 @@ class GeoipFilterTest < Test::Unit::TestCase
     assert_equal 'MA', geo_object['region_code']
   end
 
+  def test_emit_flatten
+    d1 =     d1 = create_driver(%[
+      type geoip
+      key_name ip_iddr
+      flatten
+    ], 'test')
+    ip_iddr = '93.184.216.34'
+
+    d1.run do
+      d1.emit({'ip_iddr' => ip_iddr})
+    end
+
+    emits = d1.emits
+    assert_equal 1, emits.length
+    assert_equal 'test', emits[0][0] # tag
+    geo_object = emits[0][2]
+    assert_equal [-70.8228, 42.150800000000004], geo_object['geo_coordinates']
+    assert_equal 'US', geo_object['geo_country_code']
+    assert_equal 'Norwell', geo_object['geo_city']
+    assert_equal 'MA', geo_object['geo_region_code']
+  end
+
 end
