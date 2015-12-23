@@ -48,10 +48,10 @@ access.nginx: {
   "path":"/", "query":"-", "req_bytes":200, "referer":"-",
   "status":200, "res_bytes":800, "res_body_bytes":600, "taken_time":0.001, "user_agent":"Mozilla/5.0",
   "geo": {
-    "coordinates": [-70.8228, 42.1508],
+    "coordinates": [-70.8228, 42.150800000000004],
     "country_code": "US",
     "city": "Norwell",
-    "region_code": "Massachusetts",
+    "region_code": "MA",
   }
 }
 ```
