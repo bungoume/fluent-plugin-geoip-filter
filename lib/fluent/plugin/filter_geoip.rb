@@ -10,18 +10,24 @@ module Fluent
       super
     end
 
-    config_param :database_path, :string, :default => '/etc/td-agent/data/GeoIPCity.dat'
+    config_param :database_path, :string, :default => File.dirname(__FILE__) + '/../../../data/GeoLiteCity.dat'
     config_param :key_name, :string, :default => 'client_ip'
     config_param :out_key, :string, :default => 'geo'
     config_param :flatten, :bool, :default => false
 
     def configure(conf)
-      @geoip = GeoIP.new(@geoip_database)
       super
+      begin
+        @geoip = GeoIP.new(@database_path)
+      rescue => e
+        @geoip = GeoIP.new
+        log.warn "Failed to configure parser. Use default pattern.", :error_class => e.class, :error => e.message
+        log.warn_backtrace
+      end
     end
 
     def filter(tag, time, record)
-      ip_addr = record[@geoip_lookup_key]
+      ip_addr = record[@key_name]
       unless ip_addr.nil?
         geo_ip = @geoip_cache.getset(ip_addr) { get_geoip(ip_addr) }
         if flatten
