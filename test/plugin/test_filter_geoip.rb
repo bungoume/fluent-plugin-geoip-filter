@@ -6,13 +6,13 @@ class GeoipFilterTest < Test::Unit::TestCase
   end
 
   CONFIG = %[
-    type geoip
+    @type geoip
     key_name client_ip
     out_key geo
   ]
 
-  def create_driver(conf=CONFIG,tag='test')
-    Fluent::Test::FilterTestDriver.new(Fluent::GeoipFilter, tag).configure(conf)
+  def create_driver(conf=CONFIG,tag='test',use_v1=true)
+    Fluent::Test::FilterTestDriver.new(Fluent::GeoipFilter, tag).configure(conf, use_v1)
   end
 
   def test_configure
@@ -40,7 +40,7 @@ class GeoipFilterTest < Test::Unit::TestCase
 
   def test_emit_flatten
     d1 =     d1 = create_driver(%[
-      type geoip
+      @type geoip
       key_name ip_iddr
       flatten
     ], 'test')
