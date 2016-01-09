@@ -75,6 +75,18 @@ access.nginx: {
     join hashed data by '_'. default false.
 
 
+## VS. 
+[fluent-plugin-geoip](https://github.com/y-ken/fluent-plugin-geoip)
+Fluentd output plugin to geolocate with geoip.
+It is able to customize fields with placeholder.
+
+* Easy to install.
+    * Not require to install Development Tools and geoip-dev library.
+    * ( fluent-plugin-geoip use geoip-c gem but our plugin use geoip. It's conflict. )
+* 5-10 times faster by the LRU cache.
+    * See [benchmark](test/bench_geoip_filter.rb).
+
+
 ## TODO
 
 * patches welcome!
