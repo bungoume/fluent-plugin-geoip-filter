@@ -6,7 +6,7 @@ module Fluent
     Plugin.register_filter('geoip', self)
 
     def initialize
-      @geoip_cache = LruRedux::Cache.new(10000)
+      @geoip_cache = LruRedux::Cache.new(8192)
       super
     end
 
