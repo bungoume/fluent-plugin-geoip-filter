@@ -21,8 +21,10 @@ unless ENV.has_key?('VERBOSE')
   }
   $log = nulllogger
 end
-
+require 'fluent/test/helpers'
+require 'fluent/test/driver/filter'
 require 'fluent/plugin/filter_geoip'
 
 class Test::Unit::TestCase
+  include Fluent::Test::Helpers
 end

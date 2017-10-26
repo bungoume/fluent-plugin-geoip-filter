@@ -1,9 +1,10 @@
 require 'geoip'
 require 'lru_redux'
+require 'fluent/plugin/filter'
 
-module Fluent
+module Fluent::Plugin
   class GeoipFilter < Filter
-    Plugin.register_filter('geoip', self)
+    Fluent::Plugin.register_filter('geoip', self)
 
     def initialize
       @geoip_cache = LruRedux::Cache.new(8192)
@@ -65,5 +66,5 @@ module Fluent
       ret
     end
 
-  end if defined?(Filter) # Support only >= v0.12
+  end
 end
