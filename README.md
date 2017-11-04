@@ -7,6 +7,14 @@
 [Fluentd](http://fluentd.org) filter plugin to add geoip.
 
 
+## Requirements
+
+| fluent-plugin-geoip-filter | fluentd    | ruby   |
+|----------------------------|------------|--------|
+| >= 1.0.0                   | >= v0.14.0 | >= 2.1 |
+| < 1.0.0                    | >= v0.12.0 | >= 1.9 |
+
+
 ## Installation
 
 ```bash
