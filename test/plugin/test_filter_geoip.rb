@@ -11,8 +11,8 @@ class GeoipFilterTest < Test::Unit::TestCase
     out_key geo
   ]
 
-  def create_driver(conf=CONFIG,tag='test',use_v1=true)
-    Fluent::Test::FilterTestDriver.new(Fluent::GeoipFilter, tag).configure(conf, use_v1)
+  def create_driver(conf=CONFIG)
+    Fluent::Test::Driver::Filter.new(Fluent::Plugin::GeoipFilter).configure(conf)
   end
 
   def test_configure
@@ -25,13 +25,12 @@ class GeoipFilterTest < Test::Unit::TestCase
     d1 = create_driver(CONFIG)
     ip_iddr = '93.184.216.34'
 
-    d1.run do
-      d1.emit({'client_ip' => ip_iddr})
+    d1.run(default_tag: 'test') do
+      d1.feed({'client_ip' => ip_iddr})
     end
-    emits = d1.emits
+    emits = d1.filtered
     assert_equal 1, emits.length
-    assert_equal 'test', emits[0][0] # tag
-    geo_object = emits[0][2]['geo']
+    geo_object = emits[0][1]['geo']
     assert_equal [-70.8228, 42.150800000000004], geo_object['coordinates']
     assert_equal 'US', geo_object['country_code']
     assert_equal 'Norwell', geo_object['city']
@@ -39,21 +38,20 @@ class GeoipFilterTest < Test::Unit::TestCase
   end
 
   def test_emit_flatten
-    d1 =     d1 = create_driver(%[
+    d1 = create_driver(%[
       @type geoip
       key_name ip_iddr
       flatten
-    ], 'test')
+    ])
     ip_iddr = '93.184.216.34'
 
-    d1.run do
-      d1.emit({'ip_iddr' => ip_iddr})
+    d1.run(default_tag: 'test') do
+      d1.feed({'ip_iddr' => ip_iddr})
     end
 
-    emits = d1.emits
+    emits = d1.filtered
     assert_equal 1, emits.length
-    assert_equal 'test', emits[0][0] # tag
-    geo_object = emits[0][2]
+    geo_object = emits[0][1]
     assert_equal [-70.8228, 42.150800000000004], geo_object['geo_coordinates']
     assert_equal 'US', geo_object['geo_country_code']
     assert_equal 'Norwell', geo_object['geo_city']
